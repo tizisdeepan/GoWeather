@@ -1,6 +1,7 @@
 package com.deepan.goweather
 
 import androidx.test.rule.ActivityTestRule
+import com.deepan.goweather.view.ForecastActivity
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -11,12 +12,12 @@ import org.junit.runners.JUnit4
 class TestUrl {
 
     @get:Rule
-    var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var activityRule: ActivityTestRule<ForecastActivity> = ActivityTestRule(ForecastActivity::class.java)
 
     @Test
     fun testUrlWithKeyAndLocation() {
         val city = "Bangalore"
-        val urlHardcoded = "https://api.apixu.com/v1/forecast.json?key=817b6f22124f4a65abf153359192506&days=4&q=$city"
+        val urlHardcoded = "https://api.apixu.com/v1/forecast.json?key=817b6f22124f4a65abf153359192506&days=5&q=$city"
         val urlFromStringResources = activityRule.activity.resources.getString(
             R.string.weather_api,
             activityRule.activity.resources.getString(R.string.api_key),
