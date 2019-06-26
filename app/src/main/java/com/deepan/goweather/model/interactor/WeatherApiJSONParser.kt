@@ -1,5 +1,6 @@
 package com.deepan.goweather.model.interactor
 
+import com.deepan.goweather.DateUtil
 import com.deepan.goweather.model.ForecastData
 import org.json.JSONObject
 import java.lang.Exception
@@ -17,7 +18,8 @@ object WeatherApiJSONParser {
                         val fObject = forecastArray[i] as JSONObject
                         val fData = ForecastData()
                         if (fObject.has("date")) fData.date = fObject.optString("date")
-                        if(fObject.has("day")) {
+                        fData.date = DateUtil.parseDate(fData.date)
+                        if (fObject.has("day")) {
                             val dayObject = fObject.optJSONObject("day")
                             if (dayObject.has("avgtemp_c")) fData.averageTemperatureInCelcius = try {
                                 dayObject.optString("avgtemp_c").toFloat()

@@ -56,40 +56,50 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
             android:id="@+id/dataFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@color/bg_data">
 
-        <TextView
-                android:id="@+id/currentTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:textColor="#2A2A2A"
-                android:textSize="96sp"
-                android:gravity="center"
-                android:layout_gravity="center"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true">
 
-        <TextView
-                android:id="@+id/currentLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="62dp"
-                android:textColor="#556799"
-                android:textSize="36sp"
-                android:gravity="center"
-                android:layout_gravity="center"/>
+            <TextView
+                    android:id="@+id/currentTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="56dp"
+                    android:textColor="#2A2A2A"
+                    android:textSize="96sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:id="@+id/currentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="62dp"
+                    android:textColor="#556799"
+                    android:textSize="36sp"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/foreCastRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp"/>
+                android:layout_alignParentBottom="true"
+                android:background="@color/bg_data"
+                android:elevation="8dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

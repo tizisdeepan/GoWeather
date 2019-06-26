@@ -16,13 +16,13 @@ class TestUrl {
 
     @Test
     fun testUrlWithKeyAndLocation() {
-        val city = "Bangalore"
+        val city = "12.82867455,80.0513619"
         val urlHardcoded = "https://api.apixu.com/v1/forecast.json?key=817b6f22124f4a65abf153359192506&days=5&q=$city"
         val urlFromStringResources = activityRule.activity.resources.getString(
             R.string.weather_api,
             activityRule.activity.resources.getString(R.string.api_key),
             city
         )
-        assertTrue("URL Validation failed", urlHardcoded == urlFromStringResources)
+        assertTrue("URL Validation Failed", urlHardcoded == urlFromStringResources)
     }
 }

@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.deepan.goweather.FontsConstants
-import com.deepan.goweather.FontsHelper
-import com.deepan.goweather.R
-import com.deepan.goweather.ViewType
+import com.deepan.goweather.*
 import com.deepan.goweather.model.ForecastData
 import com.deepan.goweather.model.interactor.LocationService
 import com.deepan.goweather.presenter.ForecastPresenterImpl
 import kotlinx.android.synthetic.main.activity_main.*
+import android.view.animation.AnimationUtils
+import android.view.animation.Animation
 
 
 class ForecastActivity : AppCompatActivity(), ForecastContract {
@@ -50,6 +49,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
         showView(ViewType.SHOW_LOADER)
         foreCastRecyclerView.layoutManager = LinearLayoutManager(this)
         foreCastRecyclerView.itemAnimator = null
+        foreCastRecyclerView.adapter = ForecastAdapter(ArrayList())
         setupPermissions {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 val location = LocationService(this).getLocation(LocationManager.GPS_PROVIDER)
@@ -90,10 +90,12 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
                 Log.e("FORECASTS", forecasts.toString())
                 showView(ViewType.SHOW_DATA)
                 val currentForeCast = forecasts[0]
-                currentTemperature.text = String.format("%.1f", currentForeCast.averageTemperatureInCelcius) + resources.getString(R.string.symbol_degree)
+                currentTemperature.text = NumberFormatter.format(this, currentForeCast.averageTemperatureInCelcius)
                 currentLocation.text = currentForeCast.location
                 forecasts.removeAt(0)
-
+                (foreCastRecyclerView.adapter as? ForecastAdapter)?.updateItems(forecasts)
+                val animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
+                foreCastRecyclerView.animation = animation
             } else showView(ViewType.SHOW_ERROR)
         }
     }

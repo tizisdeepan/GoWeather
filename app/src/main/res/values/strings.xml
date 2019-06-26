@@ -8,7 +8,7 @@
 
     <string name="action_retry">RETRY</string>
 
-    <string name="symbol_degree">°C</string>
+    <string name="symbol_degree">°</string>
 
     <string name="dialog_title_oops">Oops!</string>
     <string name="dialog_action_cancel">Cancel</string>
