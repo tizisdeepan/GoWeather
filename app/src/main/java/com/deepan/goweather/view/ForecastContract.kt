@@ -1,5 +1,7 @@
 package com.deepan.goweather.view
 
-interface ForecastContract {
+import android.content.Context
 
+interface ForecastContract {
+    fun getMyContext(): Context
 }
