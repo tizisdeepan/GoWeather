@@ -7,4 +7,10 @@
     <string name="label_error">Something went wrong at our end!</string>
 
     <string name="action_retry">RETRY</string>
+
+    <string name="symbol_degree">°C</string>
+
+    <string name="dialog_title_oops">Oops!</string>
+    <string name="dialog_action_cancel">Cancel</string>
+    <string name="action_settings">Go to Settings</string>
 </resources>
