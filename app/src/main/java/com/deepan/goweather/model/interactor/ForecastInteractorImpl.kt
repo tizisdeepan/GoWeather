@@ -1,8 +1,9 @@
-package com.deepan.goweather.model
+package com.deepan.goweather.model.interactor
 
 import com.deepan.goweather.ErrorTypes
 import com.deepan.goweather.NetworkUtil
 import com.deepan.goweather.R
+import com.deepan.goweather.model.ForecastData
 import com.deepan.goweather.presenter.ForecastPresenterImpl
 import okhttp3.*
 import java.io.IOException

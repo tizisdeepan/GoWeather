@@ -1,5 +1,8 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
+    <AndroidXmlCodeStyleSettings>
+      <option name="USE_CUSTOM_SETTINGS" value="true" />
+    </AndroidXmlCodeStyleSettings>
     <JetCodeStyleSettings>
       <option name="WRAP_EXPRESSION_BODY_FUNCTIONS" value="0" />
       <option name="WRAP_ELVIS_EXPRESSIONS" value="0" />
