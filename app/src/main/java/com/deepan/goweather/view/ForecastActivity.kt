@@ -87,15 +87,14 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
     override fun setData(forecasts: ArrayList<ForecastData>) {
         this.runOnUiThread {
             if (forecasts.isNotEmpty()) {
-                Log.e("FORECASTS", forecasts.toString())
                 showView(ViewType.SHOW_DATA)
                 val currentForeCast = forecasts[0]
                 currentTemperature.text = NumberFormatter.format(this, currentForeCast.averageTemperatureInCelcius)
                 currentLocation.text = currentForeCast.location
                 forecasts.removeAt(0)
                 (foreCastRecyclerView.adapter as? ForecastAdapter)?.updateItems(forecasts)
-                val animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
-                foreCastRecyclerView.animation = animation
+                foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
+                currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
             } else showView(ViewType.SHOW_ERROR)
         }
     }
