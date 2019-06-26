@@ -3,4 +3,11 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg_loader">#F5F6F7</color>
+    <color name="bg_data">#F5F6F7</color>
+    <color name="bg_error">#E85959</color>
+    <color name="button_color">#4A4A4A</color>
 </resources>

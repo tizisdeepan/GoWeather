@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.deepan.goweather.FontsConstants
+import com.deepan.goweather.FontsHelper
 import com.deepan.goweather.R
 import com.deepan.goweather.ViewType
 import com.deepan.goweather.presenter.ForecastPresenterImpl
@@ -19,8 +21,10 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
         setContentView(R.layout.activity_main)
 
         presenter = ForecastPresenterImpl(this)
-        showView(ViewType.LOADER)
+        showView(ViewType.ERROR)
 
+        errorText.typeface = FontsHelper[this, FontsConstants.THIN]
+        retryButton.typeface = FontsHelper[this, FontsConstants.REGULAR]
     }
 
     override fun showView(type: ViewType) {

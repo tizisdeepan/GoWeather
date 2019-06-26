@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">GoWeather</string>
+
     <string name="api_key">817b6f22124f4a65abf153359192506</string>
     <string name="weather_api">https://api.apixu.com/v1/forecast.json?key=%s&amp;days=5&amp;q=%s</string>
+
+    <string name="label_error">Something went wrong at our end!</string>
+
+    <string name="action_retry">RETRY</string>
 </resources>

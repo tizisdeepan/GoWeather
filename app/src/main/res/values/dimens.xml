@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_default_margin">16dp</dimen>
+    <dimen name="progress_frame">130dp</dimen>
+    <dimen name="progress_padding">130dp</dimen>
+    <dimen name="error_text_size">54sp</dimen>
+    <dimen name="button_top_margin">44dp</dimen>
+    <dimen name="text_size">16sp</dimen>
+</resources>

@@ -10,12 +10,12 @@
             android:id="@+id/loaderFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F5F6F7">
+            android:background="@color/bg_loader">
 
         <ProgressBar
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:padding="17dp"
+                android:layout_width="@dimen/progress_frame"
+                android:layout_height="@dimen/progress_frame"
+                android:padding="@dimen/progress_padding"
                 android:layout_gravity="center"
                 android:indeterminate="true"
                 android:indeterminateDuration="1000"
@@ -27,7 +27,7 @@
             android:id="@+id/dataFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F5F6F7">
+            android:background="@color/bg_data">
 
 
     </FrameLayout>
@@ -36,8 +36,38 @@
             android:id="@+id/errorFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F5F6F7">
+            android:background="@color/bg_error"
+            android:padding="@dimen/activity_default_margin">
 
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+            <TextView
+                    android:id="@+id/errorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_error"
+                    android:textSize="@dimen/error_text_size"
+                    android:textColor="@color/white"
+                    android:gravity="center"/>
+
+            <Button
+                    android:id="@+id/retryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/button_top_margin"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:background="@color/button_color"
+                    android:text="@string/action_retry"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 
