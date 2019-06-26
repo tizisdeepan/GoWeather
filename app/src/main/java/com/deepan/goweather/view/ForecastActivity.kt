@@ -18,15 +18,45 @@ import com.deepan.goweather.presenter.ForecastPresenterImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.animation.AnimationUtils
 import android.view.animation.Animation
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import com.deepan.goweather.model.ForecastDataViewModel
 
 
 class ForecastActivity : AppCompatActivity(), ForecastContract {
 
     var presenter: ForecastPresenterImpl? = null
+    lateinit var forecastsLiveData: ForecastDataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
+        foreCastRecyclerView.itemAnimator = null
+        if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
+
+        forecastsLiveData = ViewModelProviders.of(this).get(ForecastDataViewModel::class.java)
+        forecastsLiveData.forecasts.observe(this, Observer<ArrayList<ForecastData>> { forecasts ->
+            this@ForecastActivity.runOnUiThread {
+                runOnUiThread {
+                    if (forecasts.isNotEmpty()) {
+                        showView(ViewType.SHOW_DATA)
+                        val currentForeCast = forecasts[0]
+                        currentTemperature.text = NumberFormatter.format(this, currentForeCast.averageTemperatureInCelcius)
+                        currentLocation.text = currentForeCast.location
+                        foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
+                        foreCastRecyclerView.itemAnimator = null
+                        if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
+                        (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.takeLast(forecasts.size - 1))
+                        foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
+                        currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
+                    } else showView(ViewType.SHOW_ERROR)
+                }
+            }
+        })
 
         initViews()
 
@@ -47,55 +77,47 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
     private fun initViews() {
         if (presenter == null) presenter = ForecastPresenterImpl(this)
         showView(ViewType.SHOW_LOADER)
-        foreCastRecyclerView.layoutManager = LinearLayoutManager(this)
-        foreCastRecyclerView.itemAnimator = null
-        foreCastRecyclerView.adapter = ForecastAdapter(ArrayList())
-        setupPermissions {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                val location = LocationService(this).getLocation(LocationManager.GPS_PROVIDER)
-                if (location != null) presenter?.getForecastData("${location.latitude},${location.longitude}")
-                else showView(ViewType.SHOW_ERROR)
+        if (forecastsLiveData.forecasts.value == null) {
+            setupPermissions {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    val location = LocationService(this).getLocation(LocationManager.GPS_PROVIDER)
+                    if (location != null && NetworkUtil.isConnected(this)) presenter?.getForecastData("${location.latitude},${location.longitude}")
+                    else showView(ViewType.SHOW_ERROR)
+                }
             }
-        }
+        } else forecastsLiveData.loadForecasts(forecastsLiveData.forecasts.value ?: ArrayList())
     }
 
     override fun showView(type: Int) {
-        when (type) {
-            ViewType.SHOW_LOADER -> {
-                loaderFrame.visibility = View.VISIBLE
-                dataFrame.visibility = View.GONE
-                errorFrame.visibility = View.GONE
-            }
-            ViewType.SHOW_DATA -> {
-                loaderFrame.visibility = View.GONE
-                dataFrame.visibility = View.VISIBLE
-                errorFrame.visibility = View.GONE
-            }
-            ViewType.SHOW_ERROR -> {
-                loaderFrame.visibility = View.GONE
-                dataFrame.visibility = View.GONE
-                errorFrame.visibility = View.VISIBLE
-            }
-            else -> {
-                loaderFrame.visibility = View.GONE
-                dataFrame.visibility = View.GONE
-                errorFrame.visibility = View.VISIBLE
+        runOnUiThread {
+            when (type) {
+                ViewType.SHOW_LOADER -> {
+                    loaderFrame.visibility = View.VISIBLE
+                    dataFrame.visibility = View.GONE
+                    errorFrame.visibility = View.GONE
+                }
+                ViewType.SHOW_DATA -> {
+                    loaderFrame.visibility = View.GONE
+                    dataFrame.visibility = View.VISIBLE
+                    errorFrame.visibility = View.GONE
+                }
+                ViewType.SHOW_ERROR -> {
+                    loaderFrame.visibility = View.GONE
+                    dataFrame.visibility = View.GONE
+                    errorFrame.visibility = View.VISIBLE
+                }
+                else -> {
+                    loaderFrame.visibility = View.GONE
+                    dataFrame.visibility = View.GONE
+                    errorFrame.visibility = View.VISIBLE
+                }
             }
         }
     }
 
     override fun setData(forecasts: ArrayList<ForecastData>) {
-        this.runOnUiThread {
-            if (forecasts.isNotEmpty()) {
-                showView(ViewType.SHOW_DATA)
-                val currentForeCast = forecasts[0]
-                currentTemperature.text = NumberFormatter.format(this, currentForeCast.averageTemperatureInCelcius)
-                currentLocation.text = currentForeCast.location
-                forecasts.removeAt(0)
-                (foreCastRecyclerView.adapter as? ForecastAdapter)?.updateItems(forecasts)
-                foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
-                currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-            } else showView(ViewType.SHOW_ERROR)
+        runOnUiThread {
+            forecastsLiveData.loadForecasts(forecasts)
         }
     }
 

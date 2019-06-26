@@ -6,19 +6,19 @@ import com.deepan.goweather.model.ForecastData
 import com.deepan.goweather.model.interactor.ForecastInteractorImpl
 import com.deepan.goweather.view.ForecastContract
 
-class ForecastPresenterImpl(var contract: ForecastContract) : ForecastPresenter {
+class ForecastPresenterImpl(var contract: ForecastContract) : ForecastPresenter, ForecastResponseCallback {
 
-    val interactor = ForecastInteractorImpl(this)
+    val interactor = ForecastInteractorImpl()
 
     override fun getForecastData(location: String) {
-        interactor.getForecast(location, this::getForecastDataOnSuccess, this::getForecastDataOnFailure)
+        interactor.getForecast(location, this)
     }
 
-    private fun getForecastDataOnSuccess(forecasts: ArrayList<ForecastData>) {
+    override fun getForecastDataOnSuccess(forecasts: ArrayList<ForecastData>) {
         contract.setData(forecasts)
     }
 
-    private fun getForecastDataOnFailure(error: ErrorTypes) {
+    override fun getForecastDataOnFailure(error: ErrorTypes) {
         contract.showView(ViewType.SHOW_ERROR)
     }
 }
