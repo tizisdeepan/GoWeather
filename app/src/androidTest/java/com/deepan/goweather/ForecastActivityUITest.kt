@@ -30,27 +30,27 @@ class ForecastActivityUITest {
     }
 
     @Test
-    fun validateTemperatureString() {
+    fun validateTemperatureStringTest() {
         onView(withId(R.id.currentTemperature)).check(matches(withText(endsWith("°"))))
     }
 
     @Test
-    fun validateTemperatureStringPattern() {
+    fun validateTemperatureStringPatternTest() {
         onView(withId(R.id.currentTemperature)).check(matches(withTextPattern()))
     }
 
     @Test
-    fun validateTemperatureListString() {
+    fun validateTemperatureListStringTest() {
         onView(withRecyclerView(R.id.foreCastRecyclerView).atPositionOnView(0, R.id.temperatureLabel)).check(matches(withText(endsWith("° C"))))
     }
 
     @Test
-    fun validateTemperatureListStringPattern() {
+    fun validateTemperatureListStringPatternTest() {
         onView(withRecyclerView(R.id.foreCastRecyclerView).atPositionOnView(0, R.id.temperatureLabel)).check(matches(withTextPatternRecyclerViewItem()))
     }
 
     @Test
-    fun validateListDayString() {
+    fun validateListDayStringTest() {
         onView(withRecyclerView(R.id.foreCastRecyclerView).atPositionOnView(0, R.id.dayLabel)).check(matches(withDayTextPatternRecyclerViewItem()))
     }
 

@@ -1,9 +1,7 @@
 package com.deepan.goweather
 
-import android.os.Handler
 import com.deepan.goweather.model.ForecastData
 import com.deepan.goweather.model.interactor.ForecastInteractor
-import com.deepan.goweather.presenter.ForecastPresenter
 import com.deepan.goweather.presenter.ForecastResponseCallback
 import org.junit.Before
 import org.junit.Test
@@ -15,7 +13,7 @@ import org.mockito.MockitoAnnotations
 import org.mockito.runners.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class MockWeatherApi {
+class MockWeatherApiTest {
 
     @Mock
     private lateinit var mockInteractor: ForecastInteractor
@@ -30,7 +28,7 @@ class MockWeatherApi {
     }
 
     @Test
-    fun mockWeatherApiSuccess() {
+    fun mockWeatherApiSuccessTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnSuccess(forecasts)
         }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
@@ -39,7 +37,7 @@ class MockWeatherApi {
     }
 
     @Test
-    fun mockWeatherApiFailureByParserError() {
+    fun mockWeatherApiFailureByParserErrorTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.PARSER_ERROR)
         }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
@@ -48,7 +46,7 @@ class MockWeatherApi {
     }
 
     @Test
-    fun mockWeatherApiFailureByApiError() {
+    fun mockWeatherApiFailureByApiErrorTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.API_CALL_ERROR)
         }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
@@ -57,7 +55,7 @@ class MockWeatherApi {
     }
 
     @Test
-    fun mockWeatherApiFailureByEmptyData() {
+    fun mockWeatherApiFailureByEmptyDataTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.EMPTY_DATA)
         }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)

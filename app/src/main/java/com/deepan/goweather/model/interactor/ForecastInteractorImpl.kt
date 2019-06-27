@@ -7,7 +7,7 @@ import okhttp3.*
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
-class ForecastInteractorImpl() : ForecastInteractor {
+class ForecastInteractorImpl : ForecastInteractor {
 
     override fun getForecast(location: String, callback: ForecastResponseCallback) {
         val request = Request.Builder().url("https://api.apixu.com/v1/forecast.json?key=817b6f22124f4a65abf153359192506&days=5&q=$location").get().build()

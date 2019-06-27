@@ -13,8 +13,8 @@
 
         <ImageView
                 android:id="@+id/infoIv"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/activity_default_margin"
@@ -30,7 +30,7 @@
                 android:layout_toEndOf="@id/infoIv"
                 android:text="@string/dialog_title_oops"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size"
+                android:textSize="20sp"
                 android:layout_toRightOf="@id/infoIv"/>
 
     </RelativeLayout>
