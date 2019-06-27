@@ -1,4 +1,4 @@
-package com.deepan.goweather.util
+package com.deepan.goweather.helpers
 
 object FontsConstants {
     const val BLACK = "Roboto-Black.ttf"

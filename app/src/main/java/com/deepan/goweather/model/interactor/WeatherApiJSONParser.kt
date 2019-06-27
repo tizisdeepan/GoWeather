@@ -1,6 +1,6 @@
 package com.deepan.goweather.model.interactor
 
-import com.deepan.goweather.util.DateUtil
+import com.deepan.goweather.helpers.DateUtil
 import com.deepan.goweather.model.ForecastData
 import org.json.JSONObject
 import java.lang.Exception

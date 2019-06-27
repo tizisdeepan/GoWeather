@@ -9,8 +9,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import com.deepan.goweather.BuildConfig
-import com.deepan.goweather.util.FontsConstants
-import com.deepan.goweather.util.FontsHelper
+import com.deepan.goweather.helpers.FontsConstants
+import com.deepan.goweather.helpers.FontsHelper
 import com.deepan.goweather.R
 import kotlinx.android.synthetic.main.dialog_permissions.*
 

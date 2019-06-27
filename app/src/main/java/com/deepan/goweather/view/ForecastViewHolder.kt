@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.deepan.goweather.util.FontsConstants
-import com.deepan.goweather.util.FontsHelper
-import com.deepan.goweather.util.NumberFormatter
+import com.deepan.goweather.helpers.FontsConstants
+import com.deepan.goweather.helpers.FontsHelper
+import com.deepan.goweather.helpers.NumberFormatter
 import com.deepan.goweather.R
 import com.deepan.goweather.model.ForecastData
 import kotlinx.android.synthetic.main.forecast_item.view.*

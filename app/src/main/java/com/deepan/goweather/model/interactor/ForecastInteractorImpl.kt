@@ -1,18 +1,21 @@
 package com.deepan.goweather.model.interactor
 
 import android.util.Log
-import com.deepan.goweather.view.ErrorTypes
+import com.deepan.goweather.helpers.ApiCalls
 import com.deepan.goweather.presenter.ForecastResponseCallback
-import okhttp3.*
+import com.deepan.goweather.view.ErrorTypes
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Request
+import okhttp3.Response
 import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 class ForecastInteractorImpl : ForecastInteractor {
 
     override fun getForecast(location: String, callback: ForecastResponseCallback) {
         val request = Request.Builder().url("https://api.apixu.com/v1/forecast.json?key=817b6f22124f4a65abf153359192506&days=5&q=$location").get().build()
         Log.e("URL", request.url().toString())
-        OkHttpClient.Builder().connectTimeout(2, TimeUnit.MINUTES).readTimeout(2, TimeUnit.MINUTES).writeTimeout(2, TimeUnit.MINUTES).build().newCall(request).enqueue(object : Callback {
+        ApiCalls().myClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 callback.getForecastDataOnFailure(ErrorTypes.API_CALL_ERROR)
             }

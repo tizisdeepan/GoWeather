@@ -17,7 +17,7 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.deepan.goweather.model.ForecastDataViewModel
-import com.deepan.goweather.util.*
+import com.deepan.goweather.helpers.*
 
 
 class ForecastActivity : AppCompatActivity(), ForecastContract {
