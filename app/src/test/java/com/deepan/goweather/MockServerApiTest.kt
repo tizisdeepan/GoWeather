@@ -3,8 +3,8 @@ package com.deepan.goweather
 import com.deepan.goweather.model.ForecastData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
