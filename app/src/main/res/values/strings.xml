@@ -6,10 +6,10 @@
     <string name="action_retry">RETRY</string>
 
     <string name="symbol_degree">°</string>
-    <string name="symbol_celcius">C</string>
-    <string name="symbol_fahrenheit">F</string>
+    <string name="symbol_celsius">C</string>
 
     <string name="dialog_title_oops">Oops!</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="action_settings">Go to Settings</string>
+    <string name="allow_location_permission">To continue, give GoWeather access to your Location service.</string>
 </resources>

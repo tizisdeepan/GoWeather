@@ -13,7 +13,7 @@
     <dimen name="location_margin_bottom">62dp</dimen>
     <dimen name="text_size">16sp</dimen>
     <dimen name="default_elevation">8dp</dimen>
-    <dimen name="permissions_title_text_size">20sp</dimen>
+    <dimen name="permissions_title_text_size">25sp</dimen>
     <dimen name="permissions_icon_size">25dp</dimen>
     <dimen name="line_indicator_height">0.5dp</dimen>
     <dimen name="forecast_item_height">80dp</dimen>

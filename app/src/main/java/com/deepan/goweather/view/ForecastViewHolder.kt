@@ -19,7 +19,7 @@ class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     @SuppressLint("SetTextI18n")
     fun setData(ctx: Context, forecastData: ForecastData) {
         dayLabel.text = forecastData.date
-        temperatureLabel.text = "${NumberFormatter.format(ctx, forecastData.averageTemperatureInCelcius)} ${ctx.resources.getString(R.string.symbol_celcius)}"
+        temperatureLabel.text = "${NumberFormatter.format(ctx, forecastData.averageTemperatureInCelsius)} ${ctx.resources.getString(R.string.symbol_celsius)}"
 
         dayLabel.typeface = FontsHelper[ctx, FontsConstants.REGULAR]
         temperatureLabel.typeface = FontsHelper[ctx, FontsConstants.REGULAR]

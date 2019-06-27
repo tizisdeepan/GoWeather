@@ -11,27 +11,16 @@
             android:paddingTop="@dimen/default_padding"
             android:paddingBottom="@dimen/default_padding">
 
-        <Button
-                android:id="@+id/infoIv"
-                android:layout_width="@dimen/permissions_icon_size"
-                android:layout_height="@dimen/permissions_icon_size"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/default_padding"
-                android:layout_marginEnd="@dimen/default_padding"
-                android:src="@drawable/ic_proceed_error"
-                android:layout_alignParentLeft="true"/>
-
         <TextView
                 android:id="@+id/permissionsTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/infoIv"
+                android:layout_marginStart="@dimen/default_padding"
+                android:layout_marginEnd="@dimen/default_padding"
                 android:text="@string/dialog_title_oops"
                 android:textColor="@color/black"
-                android:textSize="@dimen/permissions_title_text_size"
-                android:layout_toRightOf="@id/infoIv"/>
+                android:textSize="@dimen/permissions_title_text_size"/>
 
     </RelativeLayout>
 
@@ -72,7 +61,7 @@
                 android:id="@+id/settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/textview_black_round"
+                android:background="@drawable/text_view_black_round"
                 android:paddingStart="@dimen/default_padding"
                 android:paddingTop="@dimen/margin_top_normal"
                 android:paddingEnd="@dimen/default_padding"

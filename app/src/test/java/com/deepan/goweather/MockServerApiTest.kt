@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations
 
 @RunWith(JUnit4::class)
 class MockServerApiTest {
-    
+
     private val server = MockWebServer()
 
     @Before
@@ -39,7 +39,7 @@ class MockServerApiTest {
 
     @Test
     fun testJsonParser() {
-        val fd = ForecastData(averageTemperatureInCelcius = 30.3f, averageTemperatureInFahrenheit = 86.5f, date = "Thursday", location = "Guduvancheri")
+        val fd = ForecastData(averageTemperatureInCelsius = 30.3f, averageTemperatureInFahrenheit = 86.5f, date = "Thursday", location = "Guduvancheri")
         val forecasts: ArrayList<ForecastData> = ArrayList()
         forecasts.add(fd)
         val json = Gson().toJson(forecasts)

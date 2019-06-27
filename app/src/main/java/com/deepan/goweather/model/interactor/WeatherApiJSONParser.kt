@@ -21,7 +21,7 @@ object WeatherApiJSONParser {
                         fData.date = DateUtil.parseDate(fData.date)
                         if (fObject.has("day")) {
                             val dayObject = fObject.optJSONObject("day")
-                            if (dayObject.has("avgtemp_c")) fData.averageTemperatureInCelcius = try {
+                            if (dayObject.has("avgtemp_c")) fData.averageTemperatureInCelsius = try {
                                 dayObject.optString("avgtemp_c").toFloat()
                             } catch (e: Exception) {
                                 0f
