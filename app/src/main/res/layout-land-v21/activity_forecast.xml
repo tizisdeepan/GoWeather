@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ForecastActivity">
+
+    <FrameLayout
+            android:id="@+id/loaderFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_loader">
+
+        <ProgressBar
+                android:layout_width="@dimen/progress_frame"
+                android:layout_height="@dimen/progress_frame"
+                android:padding="@dimen/progress_padding"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateDuration="1000"
+                android:indeterminateDrawable="@drawable/progress"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+            android:id="@+id/errorFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/bg_error"
+            android:padding="@dimen/default_padding">
+
+        <TextView
+                android:id="@+id/errorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_error"
+                android:textSize="@dimen/error_text_size"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+        <Button
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/textview_grey_round"
+                android:text="@string/action_retry"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/dataFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:background="@color/bg_data">
+
+        <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/currentTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/temp_margin_top"
+                    android:textColor="@color/temp_color"
+                    android:textSize="@dimen/temp_text_size"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+            <TextView
+                    android:id="@+id/currentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_normal"
+                    android:layout_marginBottom="@dimen/location_margin_bottom"
+                    android:textColor="@color/location_color"
+                    android:textSize="@dimen/location_text_size"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foreCastRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:paddingTop="@dimen/default_padding"
+                android:elevation="@dimen/default_elevation"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -5,34 +5,30 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.deepan.goweather.*
 import com.deepan.goweather.model.ForecastData
-import com.deepan.goweather.model.interactor.LocationService
 import com.deepan.goweather.presenter.ForecastPresenterImpl
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_forecast.*
 import android.view.animation.AnimationUtils
-import android.view.animation.Animation
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.deepan.goweather.model.ForecastDataViewModel
+import com.deepan.goweather.util.*
 
 
 class ForecastActivity : AppCompatActivity(), ForecastContract {
 
-    var presenter: ForecastPresenterImpl? = null
-    lateinit var forecastsLiveData: ForecastDataViewModel
+    private var presenter: ForecastPresenterImpl? = null
+    private lateinit var forecastsLiveData: ForecastDataViewModel
+    private val requestCode = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_forecast)
 
         foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
         foreCastRecyclerView.itemAnimator = null
@@ -123,19 +119,18 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
 
     override fun getMyContext(): Context = this
 
-    private val PERMISSIONS_REQUEST_CODE = 101
     lateinit var dothis: () -> Unit
     private fun setupPermissions(doSomething: () -> Unit) {
         val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         dothis = doSomething
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), requestCode)
         } else dothis()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            PERMISSIONS_REQUEST_CODE -> {
+            this.requestCode -> {
                 if (grantResults.isEmpty() || grantResults.any { it != PackageManager.PERMISSION_GRANTED }) {
                     PermissionsDialog(this@ForecastActivity, "To continue, give GoWeather access to your Location service.").show()
                 } else dothis()

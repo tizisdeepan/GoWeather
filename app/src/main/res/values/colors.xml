@@ -9,5 +9,8 @@
     <color name="bg_loader">#F5F6F7</color>
     <color name="bg_data">#F5F6F7</color>
     <color name="bg_error">#E85959</color>
+    <color name="temp_color">#2A2A2A</color>
+    <color name="location_color">#556799</color>
     <color name="button_color">#4A4A4A</color>
+    <color name="line_indicator_color">#DDDDDD</color>
 </resources>

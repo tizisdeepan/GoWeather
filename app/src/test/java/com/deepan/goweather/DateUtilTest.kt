@@ -1,5 +1,6 @@
 package com.deepan.goweather
 
+import com.deepan.goweather.util.DateUtil
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith

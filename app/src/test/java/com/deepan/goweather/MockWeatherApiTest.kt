@@ -1,5 +1,6 @@
 package com.deepan.goweather
 
+import com.deepan.goweather.view.ErrorTypes
 import com.deepan.goweather.model.ForecastData
 import com.deepan.goweather.model.interactor.ForecastInteractor
 import com.deepan.goweather.presenter.ForecastResponseCallback
@@ -16,11 +17,11 @@ import org.mockito.runners.MockitoJUnitRunner
 class MockWeatherApiTest {
 
     @Mock
-    private lateinit var mockInteractor: ForecastInteractor
+    private lateinit var mockInteract: ForecastInteractor
     @Mock
     private lateinit var callback: ForecastResponseCallback
 
-    val forecasts: ArrayList<ForecastData> = ArrayList()
+    private val forecasts: ArrayList<ForecastData> = ArrayList()
 
     @Before
     fun setUp() {
@@ -31,8 +32,8 @@ class MockWeatherApiTest {
     fun mockWeatherApiSuccessTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnSuccess(forecasts)
-        }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
-        mockInteractor.getForecast("12.82867455,80.0513619", callback)
+        }.`when`(mockInteract).getForecast("12.82867455,80.0513619", callback)
+        mockInteract.getForecast("12.82867455,80.0513619", callback)
         Mockito.verify(callback, times(1)).getForecastDataOnSuccess(forecasts)
     }
 
@@ -40,8 +41,8 @@ class MockWeatherApiTest {
     fun mockWeatherApiFailureByParserErrorTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.PARSER_ERROR)
-        }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
-        mockInteractor.getForecast("12.82867455,80.0513619", callback)
+        }.`when`(mockInteract).getForecast("12.82867455,80.0513619", callback)
+        mockInteract.getForecast("12.82867455,80.0513619", callback)
         Mockito.verify(callback, times(1)).getForecastDataOnFailure(ErrorTypes.PARSER_ERROR)
     }
 
@@ -49,8 +50,8 @@ class MockWeatherApiTest {
     fun mockWeatherApiFailureByApiErrorTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.API_CALL_ERROR)
-        }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
-        mockInteractor.getForecast("12.82867455,80.0513619", callback)
+        }.`when`(mockInteract).getForecast("12.82867455,80.0513619", callback)
+        mockInteract.getForecast("12.82867455,80.0513619", callback)
         Mockito.verify(callback, times(1)).getForecastDataOnFailure(ErrorTypes.API_CALL_ERROR)
     }
 
@@ -58,8 +59,8 @@ class MockWeatherApiTest {
     fun mockWeatherApiFailureByEmptyDataTest() {
         Mockito.doAnswer {
             (it.arguments[1] as ForecastResponseCallback).getForecastDataOnFailure(ErrorTypes.EMPTY_DATA)
-        }.`when`(mockInteractor).getForecast("12.82867455,80.0513619", callback)
-        mockInteractor.getForecast("12.82867455,80.0513619", callback)
+        }.`when`(mockInteract).getForecast("12.82867455,80.0513619", callback)
+        mockInteract.getForecast("12.82867455,80.0513619", callback)
         Mockito.verify(callback, times(1)).getForecastDataOnFailure(ErrorTypes.EMPTY_DATA)
     }
 }

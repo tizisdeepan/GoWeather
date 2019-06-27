@@ -31,7 +31,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:background="@color/bg_error"
-            android:padding="@dimen/activity_default_margin">
+            android:padding="@dimen/default_padding">
 
         <TextView
                 android:id="@+id/errorText"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="@dimen/button_top_margin"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:background="@color/button_color"
+                android:background="@drawable/textview_grey_round"
                 android:text="@string/action_retry"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size"/>
@@ -60,7 +60,7 @@
             android:id="@+id/dataFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="2"
             android:background="@color/bg_data">
 
@@ -75,9 +75,9 @@
                     android:id="@+id/currentTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="56dp"
-                    android:textColor="#2A2A2A"
-                    android:textSize="96sp"
+                    android:layout_marginTop="@dimen/temp_margin_top"
+                    android:textColor="@color/temp_color"
+                    android:textSize="@dimen/temp_text_size"
                     android:gravity="center"
                     android:layout_gravity="center"/>
 
@@ -85,10 +85,10 @@
                     android:id="@+id/currentLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="62dp"
-                    android:textColor="#556799"
-                    android:textSize="36sp"
+                    android:layout_marginTop="@dimen/margin_top_normal"
+                    android:layout_marginBottom="@dimen/location_margin_bottom"
+                    android:textColor="@color/location_color"
+                    android:textSize="@dimen/location_text_size"
                     android:gravity="center"
                     android:layout_gravity="center"/>
 
@@ -102,7 +102,7 @@
                 android:background="@color/white"
                 android:clipToPadding="false"
                 android:clipChildren="false"
-                android:paddingTop="16dp"/>
+                android:paddingTop="@dimen/default_padding"/>
 
     </LinearLayout>
 

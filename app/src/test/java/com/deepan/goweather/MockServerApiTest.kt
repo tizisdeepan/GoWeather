@@ -18,7 +18,8 @@ import org.mockito.MockitoAnnotations
 
 @RunWith(JUnit4::class)
 class MockServerApiTest {
-    val server = MockWebServer()
+    
+    private val server = MockWebServer()
 
     @Before
     fun init() {

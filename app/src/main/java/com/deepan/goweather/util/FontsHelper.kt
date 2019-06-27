@@ -1,4 +1,4 @@
-package com.deepan.goweather
+package com.deepan.goweather.util
 
 import android.content.Context
 import android.graphics.Typeface
@@ -6,7 +6,7 @@ import android.util.Log
 import java.util.*
 
 object FontsHelper {
-    private val TAG = "TypefaceHelper"
+    private const val TAG = "TypefaceHelper"
 
     private val fontsCache = Hashtable<String, Typeface>()
 

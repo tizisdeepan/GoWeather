@@ -1,7 +1,7 @@
 package com.deepan.goweather.model.interactor
 
 import android.util.Log
-import com.deepan.goweather.ErrorTypes
+import com.deepan.goweather.view.ErrorTypes
 import com.deepan.goweather.presenter.ForecastResponseCallback
 import okhttp3.*
 import java.io.IOException

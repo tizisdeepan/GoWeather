@@ -1,4 +1,4 @@
-package com.deepan.goweather
+package com.deepan.goweather.util
 
 import java.text.SimpleDateFormat
 import java.util.*

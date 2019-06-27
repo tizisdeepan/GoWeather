@@ -3,22 +3,25 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:paddingStart="16dp"
-              android:paddingEnd="16dp">
+              android:paddingStart="@dimen/default_padding"
+              android:paddingEnd="@dimen/default_padding">
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="@dimen/forecast_item_height">
 
         <TextView
                 android:id="@+id/dayLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/temperatureLabel"
                 android:layout_centerVertical="true"
+                android:gravity="start"
                 android:layout_alignParentStart="true"
-                android:textColor="#2A2A2A"
-                android:textSize="16sp"
-                android:layout_alignParentLeft="true"/>
+                android:textColor="@color/temp_color"
+                android:textSize="@dimen/text_size"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/temperatureLabel"/>
 
         <TextView
                 android:id="@+id/temperatureLabel"
@@ -26,15 +29,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:textColor="#2A2A2A"
-                android:textSize="16sp"
+                android:gravity="end"
+                android:textColor="@color/temp_color"
+                android:textSize="@dimen/text_size"
                 android:layout_alignParentRight="true"/>
 
     </RelativeLayout>
 
     <TextView
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#DDDDDD"/>
+            android:layout_height="@dimen/line_indicator_height"
+            android:background="@color/line_indicator_color"/>
 
 </LinearLayout>
