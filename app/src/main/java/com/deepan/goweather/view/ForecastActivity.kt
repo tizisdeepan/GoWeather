@@ -71,8 +71,9 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
                     currentLocation.text = forecasts.location
                     foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
                     foreCastRecyclerView.itemAnimator = null
-                    if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
-                    (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.forecasts)
+                    val adapter = foreCastRecyclerView.adapter as? ForecastAdapter
+                    if (adapter == null) foreCastRecyclerView.adapter = ForecastAdapter(forecasts.forecasts)
+                    else adapter.updateItems(forecasts.forecasts)
                     foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
                     currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
                 } else showView(ViewType.SHOW_ERROR)
