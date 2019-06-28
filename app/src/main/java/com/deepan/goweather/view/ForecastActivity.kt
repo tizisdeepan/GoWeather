@@ -8,7 +8,6 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -64,23 +63,19 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
         if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
 
         forecastsLiveData = ViewModelProviders.of(this).get(ForecastDataViewModel::class.java)
-        forecastsLiveData.forecasts.observe(this, Observer<ArrayList<ForecastData>> { forecasts ->
+        forecastsLiveData.forecasts.observe(this, Observer<ForecastData> { forecasts ->
             this@ForecastActivity.runOnUiThread {
                 runOnUiThread {
-                    if (forecasts.isNotEmpty()) {
+                    if (forecasts.forecasts.isNotEmpty()) {
                         showView(ViewType.SHOW_DATA)
-                        val currentForeCast = forecasts[0]
-                        currentTemperature.text = NumberFormatter.format(this, currentForeCast.averageTemperatureInCelsius)
-                        currentLocation.text = currentForeCast.location
+                        currentTemperature.text = NumberFormatter.format(this, forecasts.averageTemperatureInCelsius)
+                        currentLocation.text = forecasts.location
                         foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
                         foreCastRecyclerView.itemAnimator = null
                         if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
-                        val isRefreshed = (foreCastRecyclerView.adapter as? ForecastAdapter)?.mForecasts?.isEmpty() ?: true
-                        (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.takeLast(forecasts.size - 1))
-                        if (isRefreshed) {
-                            foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
-                            currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-                        }
+                        (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.forecasts)
+                        foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
+                        currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
                     } else showView(ViewType.SHOW_ERROR)
                 }
             }
@@ -100,16 +95,22 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
                     else showView(ViewType.SHOW_ERROR)
                 }
             }
-        } else forecastsLiveData.loadForecasts(forecastsLiveData.forecasts.value ?: ArrayList())
+        } else forecastsLiveData.loadForecasts(forecastsLiveData.forecasts.value)
     }
 
-    override fun setData(forecasts: ArrayList<ForecastData>) {
+    override fun setData(forecasts: ForecastData) {
         runOnUiThread {
             forecastsLiveData.loadForecasts(forecasts)
         }
     }
 
-    override fun showView(type: Int) {
+    override fun showErrorPage() {
+        runOnUiThread {
+            showView(ViewType.SHOW_ERROR)
+        }
+    }
+
+    override fun showView(type: ViewType) {
         runOnUiThread {
             when (type) {
                 ViewType.SHOW_LOADER -> {
@@ -136,15 +137,10 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
                     errorFrame.visibility = View.GONE
                     permissionsFrame.visibility = View.VISIBLE
                 }
-                else -> {
-                    loaderFrame.visibility = View.GONE
-                    dataFrame.visibility = View.GONE
-                    errorFrame.visibility = View.VISIBLE
-                    permissionsFrame.visibility = View.GONE
-                }
             }
         }
     }
+
 
     override fun getMyContext(): Context = this
 

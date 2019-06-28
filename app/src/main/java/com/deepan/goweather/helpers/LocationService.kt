@@ -1,4 +1,4 @@
-package com.deepan.goweather.view
+package com.deepan.goweather.helpers
 
 import android.Manifest
 import android.content.Context

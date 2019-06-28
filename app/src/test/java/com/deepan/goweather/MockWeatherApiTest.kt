@@ -21,7 +21,7 @@ class MockWeatherApiTest {
     @Mock
     private lateinit var callback: ForecastResponseCallback
 
-    private val forecasts: ArrayList<ForecastData> = ArrayList()
+    private val forecasts: ForecastData = ForecastData()
 
     @Before
     fun setUp() {

@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 
 
 class ForecastDataViewModel : ViewModel() {
-    private var mForecasts: MutableLiveData<ArrayList<ForecastData>> = MutableLiveData()
+    private var mForecasts: MutableLiveData<ForecastData> = MutableLiveData()
 
-    val forecasts: MutableLiveData<ArrayList<ForecastData>>
+    val forecasts: MutableLiveData<ForecastData>
         get() {
             return mForecasts
         }
 
-    fun loadForecasts(forecasts: ArrayList<ForecastData>) {
-        mForecasts.value = forecasts
+    fun loadForecasts(forecasts: ForecastData?) {
+        if (forecasts != null) mForecasts.value = forecasts
     }
 }

@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.deepan.goweather.R
-import com.deepan.goweather.model.ForecastData
+import com.deepan.goweather.model.ForecastDay
 
-class ForecastAdapter(var mForecasts: ArrayList<ForecastData> = ArrayList()) : RecyclerView.Adapter<ForecastViewHolder>() {
+class ForecastAdapter(private var mForecasts: ArrayList<ForecastDay> = ArrayList()) : RecyclerView.Adapter<ForecastViewHolder>() {
 
-    fun setData(forecasts: List<ForecastData>) {
+    fun setData(forecasts: ArrayList<ForecastDay>) {
         mForecasts.clear()
         mForecasts.addAll(forecasts)
         notifyDataSetChanged()

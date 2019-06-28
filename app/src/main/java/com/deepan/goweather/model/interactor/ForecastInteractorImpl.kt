@@ -25,7 +25,7 @@ class ForecastInteractorImpl : ForecastInteractor {
                 Log.e("Forecast Data", jsonData)
                 try {
                     val forecasts = WeatherApiJSONParser.parseForecastData(jsonData)
-                    if (forecasts.isNotEmpty()) callback.getForecastDataOnSuccess(forecasts)
+                    if (forecasts.forecasts.isNotEmpty()) callback.getForecastDataOnSuccess(forecasts)
                     else callback.getForecastDataOnFailure(ErrorTypes.EMPTY_DATA)
                 } catch (e: Exception) {
                     e.printStackTrace()
