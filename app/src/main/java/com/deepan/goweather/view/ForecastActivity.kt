@@ -64,20 +64,18 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
 
         forecastsLiveData = ViewModelProviders.of(this).get(ForecastDataViewModel::class.java)
         forecastsLiveData.forecasts.observe(this, Observer<ForecastData> { forecasts ->
-            this@ForecastActivity.runOnUiThread {
-                runOnUiThread {
-                    if (forecasts.forecasts.isNotEmpty()) {
-                        showView(ViewType.SHOW_DATA)
-                        currentTemperature.text = NumberFormatter.format(this, forecasts.averageTemperatureInCelsius)
-                        currentLocation.text = forecasts.location
-                        foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
-                        foreCastRecyclerView.itemAnimator = null
-                        if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
-                        (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.forecasts)
-                        foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
-                        currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
-                    } else showView(ViewType.SHOW_ERROR)
-                }
+            RunOnUiThread(this@ForecastActivity).safely {
+                if (forecasts.forecasts.isNotEmpty()) {
+                    showView(ViewType.SHOW_DATA)
+                    currentTemperature.text = NumberFormatter.format(this, forecasts.averageTemperatureInCelsius)
+                    currentLocation.text = forecasts.location
+                    foreCastRecyclerView.layoutManager = WrapLinearLayoutManager(this)
+                    foreCastRecyclerView.itemAnimator = null
+                    if (foreCastRecyclerView.adapter == null) foreCastRecyclerView.adapter = ForecastAdapter()
+                    (foreCastRecyclerView.adapter as? ForecastAdapter)?.setData(forecasts.forecasts)
+                    foreCastRecyclerView.animation = AnimationUtils.loadAnimation(this, R.anim.slide_from_bottom)
+                    currentTemperature.animation = AnimationUtils.loadAnimation(this, R.anim.scale_up)
+                } else showView(ViewType.SHOW_ERROR)
             }
         })
 
@@ -86,7 +84,7 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
         loadData()
     }
 
-    private fun loadData() {
+    override fun loadData() {
         if (forecastsLiveData.forecasts.value == null) {
             setupPermissions {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -99,19 +97,19 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
     }
 
     override fun setData(forecasts: ForecastData) {
-        runOnUiThread {
+        RunOnUiThread(this).safely {
             forecastsLiveData.loadForecasts(forecasts)
         }
     }
 
     override fun showErrorPage() {
-        runOnUiThread {
+        RunOnUiThread(this).safely {
             showView(ViewType.SHOW_ERROR)
         }
     }
 
     override fun showView(type: ViewType) {
-        runOnUiThread {
+        RunOnUiThread(this).safely {
             when (type) {
                 ViewType.SHOW_LOADER -> {
                     loaderFrame.visibility = View.VISIBLE
@@ -141,15 +139,12 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
         }
     }
 
-
-    override fun getMyContext(): Context = this
-
     lateinit var doThis: () -> Unit
-    private fun setupPermissions(doSomething: () -> Unit) {
+    override fun setupPermissions(doSomething: () -> Unit) {
         val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         doThis = doSomething
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), requestCode)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), requestCode)
         } else doThis()
     }
 
