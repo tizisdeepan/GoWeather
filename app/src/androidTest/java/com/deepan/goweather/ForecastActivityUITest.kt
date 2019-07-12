@@ -6,23 +6,17 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
-import com.deepan.goweather.view.ForecastActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.StringEndsWith.endsWith
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 class ForecastActivityUITest {
-
-    @get:Rule
-    var activityRule: ActivityTestRule<ForecastActivity> = ActivityTestRule(ForecastActivity::class.java)
 
     @Before
     fun setUp() {
