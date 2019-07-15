@@ -15,14 +15,14 @@ class ForecastPresenterImpl(private var contract: ForecastContract) : ForecastPr
     private val disposables = CompositeDisposable()
 
     override fun getForecastData(location: String) {
-        val disposable = interact.getForecast(location).observeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.io()).subscribeWith(object : DisposableSubscriber<ForecastData>() {
+        val disposable = interact.getForecast(location).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(object : DisposableSubscriber<ForecastData>() {
             override fun onComplete() {
                 disposables.dispose()
             }
 
             override fun onNext(t: ForecastData?) {
                 if (t != null) getForecastDataOnSuccess(t)
-                else getForecastDataOnFailure(ErrorTypes.API_CALL_ERROR)
+                else getForecastDataOnFailure(ErrorTypes.EMPTY_DATA)
             }
 
             override fun onError(t: Throwable?) {

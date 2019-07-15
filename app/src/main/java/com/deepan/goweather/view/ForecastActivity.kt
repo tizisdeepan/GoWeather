@@ -98,44 +98,38 @@ class ForecastActivity : AppCompatActivity(), ForecastContract {
     }
 
     override fun setData(forecasts: ForecastData) {
-        RunOnUiThread(this).safely {
-            forecastsLiveData.loadForecasts(forecasts)
-        }
+        forecastsLiveData.loadForecasts(forecasts)
     }
 
     override fun showErrorPage() {
-        RunOnUiThread(this).safely {
-            showView(ViewType.SHOW_ERROR)
-        }
+        showView(ViewType.SHOW_ERROR)
     }
 
     override fun showView(type: ViewType) {
-        RunOnUiThread(this).safely {
-            when (type) {
-                ViewType.SHOW_LOADER -> {
-                    loaderFrame.visibility = View.VISIBLE
-                    dataFrame.visibility = View.GONE
-                    errorFrame.visibility = View.GONE
-                    permissionsFrame.visibility = View.GONE
-                }
-                ViewType.SHOW_DATA -> {
-                    loaderFrame.visibility = View.GONE
-                    dataFrame.visibility = View.VISIBLE
-                    errorFrame.visibility = View.GONE
-                    permissionsFrame.visibility = View.GONE
-                }
-                ViewType.SHOW_ERROR -> {
-                    loaderFrame.visibility = View.GONE
-                    dataFrame.visibility = View.GONE
-                    errorFrame.visibility = View.VISIBLE
-                    permissionsFrame.visibility = View.GONE
-                }
-                ViewType.SHOW_ALLOW_PERMISSION -> {
-                    loaderFrame.visibility = View.GONE
-                    dataFrame.visibility = View.GONE
-                    errorFrame.visibility = View.GONE
-                    permissionsFrame.visibility = View.VISIBLE
-                }
+        when (type) {
+            ViewType.SHOW_LOADER -> {
+                loaderFrame.visibility = View.VISIBLE
+                dataFrame.visibility = View.GONE
+                errorFrame.visibility = View.GONE
+                permissionsFrame.visibility = View.GONE
+            }
+            ViewType.SHOW_DATA -> {
+                loaderFrame.visibility = View.GONE
+                dataFrame.visibility = View.VISIBLE
+                errorFrame.visibility = View.GONE
+                permissionsFrame.visibility = View.GONE
+            }
+            ViewType.SHOW_ERROR -> {
+                loaderFrame.visibility = View.GONE
+                dataFrame.visibility = View.GONE
+                errorFrame.visibility = View.VISIBLE
+                permissionsFrame.visibility = View.GONE
+            }
+            ViewType.SHOW_ALLOW_PERMISSION -> {
+                loaderFrame.visibility = View.GONE
+                dataFrame.visibility = View.GONE
+                errorFrame.visibility = View.GONE
+                permissionsFrame.visibility = View.VISIBLE
             }
         }
     }
